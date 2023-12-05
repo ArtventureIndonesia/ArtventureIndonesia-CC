@@ -1,4 +1,4 @@
-const tfjs = require('@tensorflow/tfjs');
+const tfjs = require('@tensorflow/tfjs-node');
 
 function loadModel() {
   const modelUrl = `https://storage.googleapis.com/ml-model-bgk/model.json`;
