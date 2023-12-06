@@ -1,5 +1,0 @@
-runtime: python311
-entrypoint: gunicorn -b :$PORT app:app
-
-env_variables:
-  FLASK_ENV: 'production'
