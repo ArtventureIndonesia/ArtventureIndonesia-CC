@@ -3,8 +3,8 @@ const firebase_admin = require("firebase-admin");
 const { Storage } = require("@google-cloud/storage");
 const fs = require("fs");
 const path = require("path");
-const api_key = require("../private/key.json").api_key;
-const bucketName = require("../private/key.json").storage_bucket;
+const api_key = require("../../.private/key.json").api_key;
+const bucketName = require("../../.private/key.json").storage_bucket;
 
 // users - Buat Data Users Baru
 const makeUsers = async (request, h) => {
@@ -328,9 +328,6 @@ const getAllUsers = async (request, h) => {
         return response;
     }
 };
-
-
-
 
 // module.exports = { makeUsers };
 module.exports = { getAllUsers, getUsers, makeUsers, editUsers, deleteUsers };

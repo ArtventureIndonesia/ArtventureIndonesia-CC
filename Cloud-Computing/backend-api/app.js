@@ -1,8 +1,7 @@
-// Dependencies
 const Hapi = require("@hapi/hapi");
-const routes = require("./routes");
+const routes = require("./src/routes");
 const firebase_admin = require("firebase-admin");
-const serviceAccount = require("./private/firebase.json");
+const serviceAccount = require("./.private/firebase.json");
 
 // Fungsi Memulai Firebase
 const firebase_init = () => {
@@ -11,11 +10,10 @@ const firebase_init = () => {
     });
 };
 
-// Fungsi Memulai Server
 const init = async () => {
     const server = Hapi.server({
         port: process.env.PORT || 8080,
-        host: "0.0.0.0"
+        host: process.env.HOST || 'localhost',
     });
 
     server.route(routes);
@@ -24,6 +22,5 @@ const init = async () => {
     console.log(`Server: ${server.info.uri}`);
 };
 
-// Mengeksekusi Fungsi
 firebase_init();
 init();
