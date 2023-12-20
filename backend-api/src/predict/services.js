@@ -83,10 +83,7 @@ const predict = async ({ request, h }) => {
   return h.response({
     error: false,
     message: "Image sent successfully",
-    result: {
-      status: "Berhasil",
-      name: responseMLapi.result,
-    },
+    result: "Berhasil",
   }).code(201);
 };
 
