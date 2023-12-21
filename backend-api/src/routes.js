@@ -3,6 +3,7 @@ const adminRoutes = require('./admin/user2/routes');
 const predictRoutes = require('./predict/route');
 const taskRoutes = require('./task/route');
 const rewardRoutes = require('./reward/route');
+const newsRoutes = require('./news/route');
 
 const routes = [
   {
@@ -17,6 +18,7 @@ const routes = [
   ...predictRoutes,
   ...taskRoutes,
   ...rewardRoutes,
+  ...newsRoutes,
 ];
 
 module.exports = routes;
