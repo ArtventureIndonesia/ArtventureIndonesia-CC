@@ -1,6 +1,6 @@
 const { checkAuthorization } = require('../exceptions/unauthorized');
 
-const { createUserRegister, checkUserLogin } = require('./services');
+const { createUserRegister, checkUserLogin, rankUser } = require('./services');
 
 const registerUser = async (request, h) => {
   const key = request.headers['x-api-key'];
@@ -16,4 +16,11 @@ const loginUser = async (request, h) => {
   return await checkUserLogin({ request, h });
 };
 
-module.exports = { registerUser, loginUser };
+const getRankUser = async (request, h) => {
+  const key = request.headers['x-api-key'];
+  checkAuthorization({ request, h }, key);
+
+  return await rankUser({ request, h });
+};
+
+module.exports = { registerUser, loginUser, getRankUser };

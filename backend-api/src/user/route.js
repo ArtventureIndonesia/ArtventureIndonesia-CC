@@ -1,6 +1,7 @@
 const {
   registerUser,
   loginUser,
+  getRankUser,
 } = require('./handler');
 
 const route = [
@@ -28,6 +29,11 @@ const route = [
         output: 'stream',
       },
     },
+  },
+  {
+    method: 'GET',
+    path: '/users/rank',
+    handler: getRankUser,
   },
   {
     method: 'GET',

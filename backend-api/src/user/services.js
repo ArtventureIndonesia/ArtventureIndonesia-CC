@@ -92,6 +92,39 @@ const checkUserLogin = async ({ request, h }) => {
   }).code(200);
 };
 
+const rankUser = async ({ request, h }) => {
+  const db = firebaseAdmin.firestore();
+  const outputDb = await db.collection('users').get();
+
+  let userData = [];
+  outputDb.forEach((doc) => {
+    userData.push(doc.data());
+  });
+
+  userData = userData.sort((a, b) => b.user_points - a.user_points);
+
+  const fieldOrder = [
+    'user_name',
+    'user_id',
+    'user_points',
+  ];
+
+  // Sort the array of objects based on the field order
+  userData = userData.map((obj, index) => {
+    const sortedObj = { user_rank: index + 1 }; // Rank starts from 1
+    fieldOrder.forEach((field) => {
+      sortedObj[field] = obj[field];
+    });
+    return sortedObj;
+  });
+
+  return h.response({
+    error: false,
+    message: "Get Ranked User data success!",
+    userData,
+  }).code(201);
+};
+
 const checkIfAlreadyExists = async ({ user_name, user_email }, outputDb) => {
   const usernameQuerySnapshot = await outputDb
       .where('user_name', '==', user_name)
@@ -103,4 +136,5 @@ const checkIfAlreadyExists = async ({ user_name, user_email }, outputDb) => {
   return usernameQuerySnapshot.size > 0 || emailQuerySnapshot.size > 0;
 };
 
-module.exports = { createUserRegister, checkUserLogin };
+module.exports = { createUserRegister, checkUserLogin, rankUser };
+
